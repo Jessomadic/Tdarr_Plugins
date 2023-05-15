@@ -95,7 +95,7 @@ const details = () => ({
 
         response.infoLog += ""
         if((true) || file.forceProcessing === true){
-            response.preset = '-e svt_av1 -b ' + inputs.BitRate + ' -r 24 -E aac -B 160 -R Auto -6 dpl2 -f ' + inputs.Container + ' --optimize ' + inputs.ResolutionSelection + ' --crop 0:0:0:0';
+            response.preset = '-e svt_av1 -b ' + inputs.BitRate + ' -r 24 -E aac -B 160 -R Auto -6 dpl2 -f ' + inputs.Container + ' --optimize ' + dimensions + ' --crop 0:0:0:0';
             response.container = '.mkv'
             response.handbrakeMode = true
             response.ffmpegMode = false
