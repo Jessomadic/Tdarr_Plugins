@@ -8,6 +8,7 @@ const details = () => ({
     Description: "Transcodes to AV1 at the selected Bitrate. This is best used with Remux Files.",          
     Version: "2.1.2",
     Tags: "HandBrake,AV1",
+    Author:"Jessomadic",
   
     Inputs: [
       {
@@ -37,7 +38,7 @@ const details = () => ({
             '480p',
           ],
         },
-        tooltip: `Resolution Videos that exceed this resolution will be resized down to this resolution.`,
+        tooltip: `Any Resolution larger than this will become this Resolution `,
       },
       {
         name: 'Container',
