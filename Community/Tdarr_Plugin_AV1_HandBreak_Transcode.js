@@ -57,17 +57,61 @@ const details = () => ({
     ],
   
   });
+  const MediaInfo = {
+    videoHeight: '',
+    videoWidth: '',
+    videoFPS: '',
+    videoBR: '',
+    videoBitDepth: '',
+    overallBR: '',
+  }; // var MediaInfo
   
-  // Resolution Defining
-  // const resolutionOrder = ['480p', '720p', '1080p', '4KUHD', '8KUHD'];
-  const resolutions = {
-    '480p' : "--width 640 --height 480",
-    '720p' : "--width 1280 --height 720",
-    '1080p' : "--width 1920 --height 1080",
-    '4KUHD' : "--width 3840 --height 2160",
+  // Easier for our functions if response has global scope.
+const response = {
+  processFile: false,
+  preset: '',
+  container: '.mkv',
+  handBrakeMode: true,
+  FFmpegMode: false,
+  reQueueAfter: true,
+  infoLog: '',
+}; // var response
+
+// Finds the first video stream and populates some useful variables
+function getMediaInfo(file) {
+  let videoIdx = -1;
+
+  for (let i = 0; i < file.ffProbeData.streams.length; i += 1) {
+    const strstreamType = file.ffProbeData.streams[i].codec_type.toLowerCase();
+        // Looking For Video
+    // Check if stream is a video.
+    if (videoIdx === -1 && strstreamType === 'video') {
+      videoIdx = i;
+// get video streams resolution
+      MediaInfo.videoResolution = file.ffProbeData.streams[i].height + 'x' + file.ffProbeData.streams[i].width;
+      MediaInfo.videoHeight = Number(file.ffProbeData.streams[i].height);
+      MediaInfo.videoWidth = Number(file.ffProbeData.streams[i].width);
+      MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate);
+      MediaInfo.videoBR = Number(file.mediaInfo.track[i + 1].BitRate);
+      MediaInfo.videoBitDepth = Number(file.mediaInfo.track[i + 1].BitDepth);
+    }
+  }
+  MediaInfo.overallBR = file.mediaInfo.track[0].OverallBitRate;
+} // end  getMediaInfo()
+
+
+//define resolution order from ResolutionSelection from biggest to smallest
+const resolutionOrder = [ '8KUHD','4KUHD','1080p','720p','480p'];
+
+// define the width and height of each resolution from the resolution order 
+  const resolutionsdimensions = {
     '8KUHD' : "--width 7680 --height 4320",
+    '4KUHD' : "--width 3840 --height 2160",
+    '1080p' : "--width 1920 --height 1080",
+    '720p' : "--width 1280 --height 720",
+    '480p' : "--width 640 --height 480",
   };
-  
+    
   // eslint-disable-next-line no-unused-vars
   const plugin = (file, librarySettings, inputs) => {
     const importFresh = require('import-fresh');
@@ -76,38 +120,51 @@ const details = () => ({
     // Get the selected resolution from the 'ResolutionSelection' variable
     const selectedResolution = inputs.ResolutionSelection;
   
-    // Get the dimensions for the selected resolution from the 'resolutions' object
-    const dimensions = resolutions[selectedResolution];
+    getMediaInfo(file);
+  // use mediainfo to match height and width to a resolution on resolutiondimensions
+  let dimensions = resolutionsdimensions[selectedResolution];
+  // if the file is smaller than the selected resolution then use the file resolution
+  if(MediaInfo.videoHeight < dimensions.split(" ")[3] || MediaInfo.videoWidth < dimensions.split(" ")[1]){
+    dimensions = "--width " + MediaInfo.videoWidth + " --height " + MediaInfo.videoHeight;
+  }
+  // if the file is larger than the selected resolution then use the selected resolution
+  else{
+    // loop through the resolution order
+    for (let i = 0; i < resolutionOrder.length; i += 1) {
+      // if the selected resolution is the same as the current resolution in the loop
+      if(selectedResolution === resolutionOrder[i]){
+        // break the loop
+        break;
+      }
+    }
+  }            
+    //check the files bitrate and if it is smaller than the selected bitrate then use the file bitrate in kbps
+    getMediaInfo(file);
+    BR = MediaInfo.videoBR/1000;
+    if(BR < inputs.BitRate){
+      inputs.BitRate = BR;
+    }
+    // if the file is larger than the selected bitrate then use the selected bitrate 
+    else{
+      inputs.BitRate = inputs.BitRate;
+    }
   
-    //
-  
-
-        //Must return this object at some point
-        const response = {
-           processFile : false,
-           preset : '',
-           container : '.mkv',
-           handbrakeMode : false,
-           ffmpegMode : true,
-           reQueueAfter : true,
-           infoLog : '',
-      
-        }
-
+    
         response.infoLog += ""
         if((true) || file.forceProcessing === true){
-            response.preset = '-e svt_av1 -b ' + inputs.BitRate + ' -r 24 -E aac -B 160 -R Auto -6 dpl2 -f ' + inputs.Container + ' --optimize ' + dimensions + ' --crop 0:0:0:0';
-            response.container = '.mkv'
+            response.preset = "--encoder svt_av1 -b " + inputs.BitRate + ' -r 24 -E aac -B 160 -R Auto -6 dpl2 -f ' + inputs.Container + ' --optimize ' + dimensions + ' --crop 0:0:0:0';
+            response.container = '.' + inputs.Container;
             response.handbrakeMode = true
             response.ffmpegMode = false
             response.processFile = true
-            response.infoLog +=  'File is being transcoded at ' + inputs.BitRate + ' Kbps to ' + inputs.ResolutionSelection + ' into ' + inputs.Container + ' \n'
+            response.infoLog +=  'File is being transcoded at ' + inputs.BitRate + ' Kbps to ' + dimensions + ' as ' + inputs.Container + ' \n'
             return response
            }else{
             response.infoLog += "File is being transcoded using custom arguments \n"
             return response
            }
       }
+    
 
 module.exports.details = details;
 module.exports.plugin = plugin;
