@@ -165,7 +165,7 @@ const plugin = (file, librarySettings, inputs) => {
 
   response.infoLog += '';
   if ((true) || file.forceProcessing === true) {
-    response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r 24 -E aac -B 160 -R Auto -6 dpl2 -f ${inputs.Container} --optimize ${dimensions} --crop 0:0:0:0`;
+    response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r 24 -E aac -B 320 -R Auto -6 dpl2 --normalize-mix 1 -f ${inputs.Container} --no-optimize ${dimensions} --crop 0:0:0:0`;
     response.container = `.${inputs.Container}`;
     response.handbrakeMode = true;
     response.ffmpegMode = false;
