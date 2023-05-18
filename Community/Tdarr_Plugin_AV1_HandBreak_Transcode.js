@@ -92,11 +92,10 @@ function getMediaInfo(file) {
       MediaInfo.videoHeight = Number(file.ffProbeData.streams[i].height);
       MediaInfo.videoWidth = Number(file.ffProbeData.streams[i].width);
       MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate);
-      MediaInfo.videoBR = Number(file.mediaInfo.track[i + 1].BitRate);
-      MediaInfo.videoBitDepth = Number(file.mediaInfo.track[i + 1].BitDepth);
+      //calulate bitrate from dimensions and fps of file
+      MediaInfo.videoBR = (MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.07).toFixed(0);
     }
   }
-  MediaInfo.overallBR = file.mediaInfo.track[0].OverallBitRate;
 } // end  getMediaInfo()
 
 // define resolution order from ResolutionSelection from biggest to smallest
@@ -141,20 +140,22 @@ const plugin = (file, librarySettings, inputs) => {
     }
   }
 
-  // Calculate the bitrate for the media file using the current width and height and frame rate of the file
-  // If the calulated bitrate is over 150000 assume it's in bits and convert to kbps
-  let calculatedBitrate = Math.round((MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.07) / 1000);
-  if (calculatedBitrate > 150000) {
-    calculatedBitrate = Math.round(calculatedBitrate / 1000);
+
+  //read the bitrate of the video stream
+  videoBitRate = MediaInfo.videoBR;
+
+  //if videoBitrate is over 10000000 devide by 1000 to get the bitrate in Kbps
+  if (videoBitRate > 1000000) {
+    videoBitRate = videoBitRate / 100;
   }
-  // if the calculated bitrate is less than the selected bitrate then use the calculated bitrate
-  if (calculatedBitrate < inputs.BitRate) {
-    // eslint-disable-next-line no-param-reassign
-    inputs.BitRate = calculatedBitrate;
+  else { videoBitRate = videoBitRate / 1000; }
+  //if VideoBitrate is smaller than selected bitrate then use the videoBitrate
+  if (videoBitRate < inputs.BitRate) {
+    inputs.BitRate = videoBitRate;
+    
   }
-  // If Bitrate is larger than the selected bitrate then use the selected bitrate
+  //if VideoBitrate is larger than selected bitrate then use the selected bitrate
   else {
-    // eslint-disable-next-line no-self-assign
     inputs.BitRate = inputs.BitRate;
   }
 
