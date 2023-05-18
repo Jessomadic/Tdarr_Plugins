@@ -97,7 +97,7 @@ function getMediaInfo(file) {
       MediaInfo.videoWidth = Number(file.ffProbeData.streams[i].width);
       MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate);
       //calulate bitrate from dimensions and fps of file
-      MediaInfo.videoBR = (MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.07).toFixed(0);
+      MediaInfo.videoBR = (MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.08).toFixed(0);
     }
   }
 } // end  getMediaInfo()
