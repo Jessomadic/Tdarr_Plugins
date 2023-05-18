@@ -22,7 +22,10 @@ const details = () => ({
         ~ Requested Bitrate ~ \\n
         Put in the Bitrate you want to process to in Kbps. For example 4000Kbps is 4Mbps. 
         Remember that AV1 is much more efficient with data than h264/5
-        I noticed that around 4Mbps is the sweet spot for 1080p from remux. \\n\\n`,
+        I noticed that around 4Mbps is the sweet spot for 1080p from remux. \\n\\n
+        It's worth noting that if the bitrate of the file is lower than the requested bitrate,
+        the file will be processed at the bitrate of the file. \\n\\n`,
+        
     },
     {
       name: 'ResolutionSelection',
@@ -38,7 +41,8 @@ const details = () => ({
           '480p',
         ],
       },
-      tooltip: 'Any Resolution larger than this will become this Resolution ',
+      tooltip: 'Any Resolution larger than this will become this Resolution same as the bitrate if the Res is lower than the selected it will use the res of the file as to not cause bloating of file size.',
+          
     },
     {
       name: 'Container',
