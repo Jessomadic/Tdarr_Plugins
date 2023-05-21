@@ -2,13 +2,13 @@
 /* eslint-disable no-restricted-globals */
 const details = () => ({
   id: 'Tdarr_Plugin_AV1_HandBreak_Transcode',
+  Stage: 'Pre-processing',
   Name: 'AV1 HandBreak Transcoder',
   Type: 'Video',
   Operation: 'Transcode',
   Description: 'Transcodes to AV1 at the selected Bitrate. This is best used with Remux Files.',
   Version: '2.1.2',
   Tags: 'HandBrake,AV1',
-  Author: 'Jessomadic',
 
   Inputs: [
     {
@@ -21,10 +21,7 @@ const details = () => ({
       tooltip: `
         ~ Requested Bitrate ~ \\n
         Put in the Bitrate you want to process to in Kbps. For example 4000Kbps is 4Mbps. 
-        Remember that AV1 is much more efficient with data than h264/5
-        I noticed that around 4Mbps is the sweet spot for 1080p from remux. \\n\\n
-        It's worth noting that if the bitrate of the file is lower than the requested bitrate,
-        the file will be processed at the bitrate of the file. \\n\\n`,
+        `,
 
     },
     {
@@ -69,6 +66,7 @@ const MediaInfo = {
   videoBR: '',
   videoBitDepth: '',
   overallBR: '',
+  videoResolution: '',
 }; // var MediaInfo
 
 // Easier for our functions if response has global scope.
@@ -121,6 +119,8 @@ const plugin = (file, librarySettings, inputs) => {
   const importFresh = require('import-fresh');
   // eslint-disable-next-line no-unused-vars
   const library = importFresh('../methods/library.js');
+  // eslint-disable-next-line no-unused-vars
+  const lib = require('../methods/lib')();
 
   // Get the selected resolution from the 'ResolutionSelection' variable
   const selectedResolution = inputs.ResolutionSelection;
