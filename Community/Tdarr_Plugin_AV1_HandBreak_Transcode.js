@@ -25,7 +25,7 @@ const details = () => ({
         I noticed that around 4Mbps is the sweet spot for 1080p from remux. \\n\\n
         It's worth noting that if the bitrate of the file is lower than the requested bitrate,
         the file will be processed at the bitrate of the file. \\n\\n`,
-        
+
     },
     {
       name: 'ResolutionSelection',
@@ -41,8 +41,9 @@ const details = () => ({
           '480p',
         ],
       },
+      // eslint-disable-next-line max-len
       tooltip: 'Any Resolution larger than this will become this Resolution same as the bitrate if the Res is lower than the selected it will use the res of the file as to not cause bloating of file size.',
-          
+
     },
     {
       name: 'Container',
@@ -96,7 +97,7 @@ function getMediaInfo(file) {
       MediaInfo.videoHeight = Number(file.ffProbeData.streams[i].height);
       MediaInfo.videoWidth = Number(file.ffProbeData.streams[i].width);
       MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate);
-      //calulate bitrate from dimensions and fps of file
+      // calulate bitrate from dimensions and fps of file
       MediaInfo.videoBR = (MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.08).toFixed(0);
     }
   }
@@ -130,6 +131,7 @@ const plugin = (file, librarySettings, inputs) => {
   // if the file is smaller than the selected resolution then use the file resolution
   if (MediaInfo.videoHeight < dimensions.split(' ')[3] || MediaInfo.videoWidth < dimensions.split(' ')[1]) {
     dimensions = `--width ${MediaInfo.videoWidth} --height ${MediaInfo.videoHeight}`;
+    // eslint-disable-next-line brace-style
   }
 
   // if the file is larger than the selected resolution then use the selected resolution
@@ -144,27 +146,29 @@ const plugin = (file, librarySettings, inputs) => {
     }
   }
 
+  // read the bitrate of the video stream
+  let videoBitRate = MediaInfo.videoBR;
 
-  //read the bitrate of the video stream
-  videoBitRate = MediaInfo.videoBR;
-
-  //if videoBitrate is over 10000000 devide by 1000 to get the bitrate in Kbps
+  // if videoBitrate is over 1000000 devide by 100 to get the bitrate in Kbps
   if (videoBitRate > 1000000) {
-    videoBitRate = videoBitRate / 100;
-  }
-  else { videoBitRate = videoBitRate / 1000; }
-  //if VideoBitrate is smaller than selected bitrate then use the videoBitrate
+    videoBitRate /= 100;
+  } else { videoBitRate /= 1000; }
+  // if VideoBitrate is smaller than selected bitrate then use the videoBitrate
   if (videoBitRate < inputs.BitRate) {
+    // eslint-disable-next-line no-param-reassign
     inputs.BitRate = videoBitRate;
-    
+    // eslint-disable-next-line brace-style
   }
-  //if VideoBitrate is larger than selected bitrate then use the selected bitrate
+  // if VideoBitrate is larger than selected bitrate then use the selected bitrate
   else {
+    // eslint-disable-next-line no-self-assign, no-param-reassign
     inputs.BitRate = inputs.BitRate;
   }
 
   response.infoLog += '';
+  // eslint-disable-next-line no-constant-condition
   if ((true) || file.forceProcessing === true) {
+    // eslint-disable-next-line max-len
     response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r 24 -E aac -B 320 -R Auto -6 dpl2 --normalize-mix 1 -f ${inputs.Container} --no-optimize ${dimensions} --crop 0:0:0:0`;
     response.container = `.${inputs.Container}`;
     response.handbrakeMode = true;
