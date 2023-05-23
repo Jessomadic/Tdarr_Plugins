@@ -180,7 +180,12 @@ const plugin = (file, librarySettings, inputs) => {
     // eslint-disable-next-line no-self-assign, no-param-reassign
     inputs.BitRate = inputs.BitRate;
   }
-
+  //Skip Transcoding if File is already AV1
+  if (file.ffProbeData.streams[0].codec_name === 'av1') {
+    response.processFile = false;
+    response.infoLog += 'File is already AV1 \n';
+    return response;
+  }
   // eslint-disable-next-line no-constant-condition
   if ((true) || file.forceProcessing === true) {
     // eslint-disable-next-line max-len
@@ -192,9 +197,7 @@ const plugin = (file, librarySettings, inputs) => {
     response.infoLog += `File is being transcoded at ${inputs.BitRate} Kbps to ${dimensions} as ${inputs.Container} \n`;
     return response;
   }
-  response.infoLog += 'File is being transcoded using custom arguments \n';
-  return response;
-};
+  };
 
 module.exports.details = details;
 module.exports.plugin = plugin;
