@@ -1,14 +1,14 @@
 /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
 /* eslint-disable no-restricted-globals */
 const details = () => ({
-  id: 'Tdarr_Plugin_AV1_HandBreak_Transcode',
+  id: 'Tdarr_Plugin_Jeso_AV1_HandBrake_Transcode',
   Stage: 'Pre-processing',
-  Name: 'AV1 HandBreak Transcoder',
+  Name: 'AV1 HandBrake Transcoder',
   Type: 'Video',
   Operation: 'Transcode',
   Description: 'Transcodes to AV1 at the selected Bitrate. This is best used with Remux Files.',
-  Version: '2.1.2',
-  Tags: 'HandBrake,AV1',
+  Version: '2.1.3',
+  Tags: 'HandBrake,configurable',
 
   Inputs: [
     {
@@ -20,8 +20,7 @@ const details = () => ({
       },
       tooltip: `
         ~ Requested Bitrate ~ \\n
-        Put in the Bitrate you want to process to in Kbps. For example 4000Kbps is 4Mbps. 
-        `,
+        Put in the Bitrate you want to process to in Kbps. For example 4000Kbps is 4Mbps. `,
 
     },
     {
@@ -55,6 +54,36 @@ const details = () => ({
       },
       tooltip: ` Container Type \\n\\n
           mkv or mp4.\\n`,
+    },
+    {
+      name: 'AudioType',
+      type: 'string',
+      defaultValue: 'AAC',
+      inputUI: {
+        type: 'dropdown',
+        options: [
+          'AAC',
+          'EAC3',
+          'MP3',
+          'Vorbis',
+          'Flac16',
+          'Flac24',
+        ],
+      },
+      // eslint-disable-next-line max-len
+      tooltip: 'Set Audio container type that you want to use',
+
+    },
+    {
+      name: 'FrameRate',
+      type: 'string',
+      defaultValue: '24',
+      inputUI: {
+        type: 'text',
+      },
+      // eslint-disable-next-line max-len
+      tooltip: 'If the files framerate is higher than 24 and you want to maintain that framerate you can do so here',
+
     },
   ],
 
@@ -94,7 +123,7 @@ function getMediaInfo(file) {
       MediaInfo.videoResolution = `${file.ffProbeData.streams[i].height}x${file.ffProbeData.streams[i].width}`;
       MediaInfo.videoHeight = Number(file.ffProbeData.streams[i].height);
       MediaInfo.videoWidth = Number(file.ffProbeData.streams[i].width);
-      MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate);
+      MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate) || 25;
       // calulate bitrate from dimensions and fps of file
       MediaInfo.videoBR = (MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.08).toFixed(0);
     }
@@ -133,19 +162,6 @@ const plugin = (file, librarySettings, inputs) => {
     dimensions = `--width ${MediaInfo.videoWidth} --height ${MediaInfo.videoHeight}`;
     // eslint-disable-next-line brace-style
   }
-
-  // if the file is larger than the selected resolution then use the selected resolution
-  else {
-    // loop through the resolution order
-    for (let i = 0; i < resolutionOrder.length; i += 1) {
-      // if the selected resolution is the same as the current resolution in the loop
-      if (selectedResolution === resolutionOrder[i]) {
-        // break the loop
-        break;
-      }
-    }
-  }
-
   // read the bitrate of the video stream
   let videoBitRate = MediaInfo.videoBR;
 
@@ -165,11 +181,10 @@ const plugin = (file, librarySettings, inputs) => {
     inputs.BitRate = inputs.BitRate;
   }
 
-  response.infoLog += '';
   // eslint-disable-next-line no-constant-condition
   if ((true) || file.forceProcessing === true) {
     // eslint-disable-next-line max-len
-    response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r 24 -E aac -B 320 -R Auto -6 dpl2 --normalize-mix 1 -f ${inputs.Container} --no-optimize ${dimensions} --crop 0:0:0:0`;
+    response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r ${inputs.FrameRate} -E ${inputs.AudioType} -f ${inputs.Container} --no-optimize ${dimensions} --crop 0:0:0:0`;
     response.container = `.${inputs.Container}`;
     response.handbrakeMode = true;
     response.ffmpegMode = false;
