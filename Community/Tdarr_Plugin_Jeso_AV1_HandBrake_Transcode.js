@@ -42,24 +42,6 @@ const details = () => ({
 
     },
     {
-      name: 'MaxResolution',
-      type: 'string',
-      defaultValue: '1080p',
-      inputUI: {
-        type: 'dropdown',
-        options: [
-          '8KUHD',
-          '4KUHD',
-          '1080p',
-          '720p',
-          '480p',
-        ],
-      },
-      // eslint-disable-next-line max-len
-      tooltip: 'Any Resolution smaller than this will be skipped.',
-
-    },
-    {
       name: 'Container',
       type: 'string',
       defaultValue: 'mkv',
@@ -158,15 +140,6 @@ const plugin = (file, librarySettings, inputs) => {
     '720p': '--width 1280 --height 720',
     '480p': '--width 640 --height 480',
   };
-  
-    //assign resolutionorder ratings based on what is bigger and smaller
-    const resolutionOrderRating = {
-      '8KUHD': 5,
-      '4KUHD': 4,
-      '1080p': 3,
-      '720p': 2,
-      '480p': 1,
-    };
 
   const videoResolution = MediaInfo.videoresolution;
   const selectedResolution = inputs.ResolutionSelection;
@@ -184,7 +157,7 @@ const plugin = (file, librarySettings, inputs) => {
   // eslint-disable-next-line no-constant-condition
   if ((true) || file.forceProcessing === true) {
     // eslint-disable-next-line max-len
-    response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r ${inputs.FrameRate} -E ${inputs.AudioType} -f ${inputs.Container} --no-optimize ${dimensions} --crop 0:0:0:0`;
+    response.preset = `--encoder svt_av1 -b ${inputs.BitRate} -r ${inputs.FrameRate} -E ${inputs.AudioType} -f ${inputs.Container} --normalize-mix 1 --no-optimize ${dimensions} --crop 0:0:0:0`;
     response.container = `.${inputs.Container}`;
     response.handbrakeMode = true;
     response.ffmpegMode = false;
