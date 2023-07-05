@@ -42,6 +42,24 @@ const details = () => ({
 
     },
     {
+      name: 'MaxResolution',
+      type: 'string',
+      defaultValue: '1080p',
+      inputUI: {
+        type: 'dropdown',
+        options: [
+          '8KUHD',
+          '4KUHD',
+          '1080p',
+          '720p',
+          '480p',
+        ],
+      },
+      // eslint-disable-next-line max-len
+      tooltip: 'Any Resolution smaller than this will be skipped.',
+
+    },
+    {
       name: 'Container',
       type: 'string',
       defaultValue: 'mkv',
@@ -89,58 +107,37 @@ const details = () => ({
 
 });
 const MediaInfo = {
+  videoresolution:'',
   videoHeight: '',
   videoWidth: '',
   videoFPS: '',
   videoBR: '',
-  videoBitDepth: '',
-  overallBR: '',
-  videoResolution: '',
 }; // var MediaInfo
 
 // Easier for our functions if response has global scope.
 const response = {
   processFile: false,
   preset: '',
-  container: '.mkv',
-  handBrakeMode: true,
-  FFmpegMode: false,
-  reQueueAfter: true,
+  container: '',
+  handBrakeMode: '',
+  FFmpegMode: '',
+  reQueueAfter: '',
   infoLog: '',
 }; // var response
 
-// Finds the first video stream and populates some useful variables
 function getMediaInfo(file) {
-  let videoIdx = -1;
-
-  for (let i = 0; i < file.ffProbeData.streams.length; i += 1) {
-    const strstreamType = file.ffProbeData.streams[i].codec_type.toLowerCase();
-    // Looking For Video
-    // Check if stream is a video.
-    if (videoIdx === -1 && strstreamType === 'video') {
-      videoIdx = i;
-      // get video streams resolution
-      MediaInfo.videoResolution = `${file.ffProbeData.streams[i].height}x${file.ffProbeData.streams[i].width}`;
+  for (let i = 0; i < file.ffProbeData.streams.length; i++) {
+    if (file.ffProbeData.streams[i].codec_type.toLowerCase() === 'video') {
+//mediainfo.resolution needs to be calulated using MediaInfo.videoheight and MediaInfo.videowidth
+      MediaInfo.videoresolution = file.ffProbeData.streams[i].height + 'x' + file.ffProbeData.streams[i].width;
       MediaInfo.videoHeight = Number(file.ffProbeData.streams[i].height);
       MediaInfo.videoWidth = Number(file.ffProbeData.streams[i].width);
       MediaInfo.videoFPS = Number(file.mediaInfo.track[i + 1].FrameRate) || 25;
-      // calulate bitrate from dimensions and fps of file
       MediaInfo.videoBR = (MediaInfo.videoHeight * MediaInfo.videoWidth * MediaInfo.videoFPS * 0.08).toFixed(0);
+      break; // Exit the loop once the first video stream is found
     }
   }
-} // end  getMediaInfo()
-
-// define resolution order from ResolutionSelection from biggest to smallest
-const resolutionOrder = ['8KUHD', '4KUHD', '1080p', '720p', '480p'];
-
-// define the width and height of each resolution from the resolution order
-const resolutionsdimensions = {
-  '8KUHD': '--width 7680 --height 4320',
-  '4KUHD': '--width 3840 --height 2160',
-  '1080p': '--width 1920 --height 1080',
-  '720p': '--width 1280 --height 720',
-  '480p': '--width 640 --height 480',
-};
+}
 
 // eslint-disable-next-line no-unused-vars
 const plugin = (file, librarySettings, inputs) => {
@@ -151,35 +148,33 @@ const plugin = (file, librarySettings, inputs) => {
   // eslint-disable-next-line no-unused-vars
   const lib = require('../methods/lib')();
 
-  // Get the selected resolution from the 'ResolutionSelection' variable
+
+  const resolutionOrder = ['8KUHD', '4KUHD', '1080p', '720p', '480p'];
+
+  const resolutionsdimensions = {
+    '8KUHD': '--width 7680 --height 4320',
+    '4KUHD': '--width 3840 --height 2160',
+    '1080p': '--width 1920 --height 1080',
+    '720p': '--width 1280 --height 720',
+    '480p': '--width 640 --height 480',
+  };
+  
+    //assign resolutionorder ratings based on what is bigger and smaller
+    const resolutionOrderRating = {
+      '8KUHD': 5,
+      '4KUHD': 4,
+      '1080p': 3,
+      '720p': 2,
+      '480p': 1,
+    };
+
+  const videoResolution = MediaInfo.videoresolution;
   const selectedResolution = inputs.ResolutionSelection;
+  
+ 
+  // make a variable for the dimensions
+  const dimensions = resolutionsdimensions[selectedResolution]; 
 
-  getMediaInfo(file);
-  // use mediainfo to match height and width to a resolution on resolutiondimensions
-  let dimensions = resolutionsdimensions[selectedResolution];
-  // if the file is smaller than the selected resolution then use the file resolution
-  if (MediaInfo.videoHeight < dimensions.split(' ')[3] || MediaInfo.videoWidth < dimensions.split(' ')[1]) {
-    dimensions = `--width ${MediaInfo.videoWidth} --height ${MediaInfo.videoHeight}`;
-    // eslint-disable-next-line brace-style
-  }
-  // read the bitrate of the video stream
-  let videoBitRate = MediaInfo.videoBR;
-
-  // if videoBitrate is over 1000000 devide by 100 to get the bitrate in Kbps
-  if (videoBitRate > 1000000) {
-    videoBitRate /= 100;
-  } else { videoBitRate /= 1000; }
-  // if VideoBitrate is smaller than selected bitrate then use the videoBitrate
-  if (videoBitRate < inputs.BitRate) {
-    // eslint-disable-next-line no-param-reassign
-    inputs.BitRate = videoBitRate;
-    // eslint-disable-next-line brace-style
-  }
-  // if VideoBitrate is larger than selected bitrate then use the selected bitrate
-  else {
-    // eslint-disable-next-line no-self-assign, no-param-reassign
-    inputs.BitRate = inputs.BitRate;
-  }
   //Skip Transcoding if File is already AV1
   if (file.ffProbeData.streams[0].codec_name === 'av1') {
     response.processFile = false;
@@ -198,6 +193,5 @@ const plugin = (file, librarySettings, inputs) => {
     return response;
   }
   };
-
 module.exports.details = details;
 module.exports.plugin = plugin;
