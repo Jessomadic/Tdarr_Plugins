@@ -1,11 +1,12 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_action_remove_stream_by_specified_property',
   Stage: 'Pre-processing',
-  Name: 'Remove streams by specified property',
+  Name: 'Remove Streams By Specified Property',
   Type: 'Video',
   Operation: 'Transcode',
   Description: `
   This plugin removes streams based on the specified property.
+  Checks FFprobe 'streams' and MediaInfo 'track' properties.
   `,
   Version: '1.00',
   Tags: 'action',
@@ -41,10 +42,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,
@@ -76,7 +77,10 @@ const plugin = (file, librarySettings, inputs, otherArguments) => {
     let streamToRemove = false;
     for (let i = 0; i < file.ffProbeData.streams.length; i += 1) {
       try {
-        if (valuesToRemove.includes(String(file.ffProbeData.streams[i][propertyToCheck]))) {
+        if (
+          valuesToRemove.includes(String(file.ffProbeData.streams[i][propertyToCheck]))
+          || valuesToRemove.includes(String(file.mediaInfo.track[i + 1][propertyToCheck]))
+        ) {
           response.preset += ` -map -0:${i} `;
           response.infoLog += ` Removing stream ${i} which is has ${propertyToCheck}`
           + ` of ${file.ffProbeData.streams[i][propertyToCheck]} \n`;

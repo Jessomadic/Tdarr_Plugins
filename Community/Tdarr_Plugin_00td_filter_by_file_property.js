@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_filter_by_file_property',
   Stage: 'Pre-processing',
-  Name: 'Filter by file property',
+  Name: 'Filter By File Property',
   Type: 'Video',
   Operation: 'Filter',
   Description: `Filter by a top level file property.
@@ -151,10 +151,10 @@ const conditionMet = (response, inputsArr, value, condition) => {
   return false;
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

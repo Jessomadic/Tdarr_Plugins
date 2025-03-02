@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_filter_break_stack_if_processed',
   Stage: 'Pre-processing',
-  Name: 'Filter - break out of plugin stack if processed',
+  Name: 'Filter - Break Out Of Plugin Stack If Processed',
   Type: 'Video',
   Operation: 'Filter',
   Description: `This plugin will break out of the plugin stack if the file has been processed
@@ -12,10 +12,10 @@ const details = () => ({
   Inputs: [],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: true,

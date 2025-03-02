@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_x7ab_Remove_Subs",
     Stage: "Pre-processing",
-    Name: "Remove subtitles ",
+    Name: "Remove Subtitles",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] This plugin removes subtitles if detected. The output container is the same as the original. \n\n`,
@@ -13,11 +13,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

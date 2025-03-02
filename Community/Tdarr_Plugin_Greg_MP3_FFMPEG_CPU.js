@@ -2,7 +2,7 @@ module.exports.dependencies = ['import-fresh'];
 const details = () => ({
   id: 'Tdarr_Plugin_Greg_MP3_FFMPEG_CPU',
   Stage: 'Pre-processing',
-  Name: 'Audio Transcode to MP3 using CPU and FFMPEG',
+  Name: 'Audio Transcode To MP3 Using CPU And FFMPEG',
   Type: 'Audio',
   Operation: 'Transcode',
   Description: '[Contains built-in filter] Convert an audio file to mp3, retaining ID3 tags, '
@@ -26,10 +26,10 @@ const details = () => ({
 
 module.exports.details = details;
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     // 320K selected over 384k intentionally

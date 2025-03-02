@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_z2ab_TheRealShadoh_FFmpeg_Subs_H264_Slow',
   Stage: 'Pre-processing',
-  Name: 'TheRealShadoh FFmpeg Subs Slow, video MP4, audio AAC, keep subs. ',
+  Name: 'TheRealShadoh FFmpeg Subs Slow, Video MP4, Audio AAC, Keep Subs',
   Type: 'Video',
   Operation: 'Transcode',
   Description: '[Contains built-in filter] This plugin transcodes into H264 using FFmpeg\'s \'Slow\' preset'
@@ -13,10 +13,10 @@ const details = () => ({
   Inputs: [],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   // Must return this object
 

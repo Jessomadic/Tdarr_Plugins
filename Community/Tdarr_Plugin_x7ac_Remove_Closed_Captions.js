@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_x7ac_Remove_Closed_Captions',
   Stage: 'Pre-processing',
-  Name: 'Remove burned closed captions',
+  Name: 'Remove Burned Closed Captions',
   Type: 'Video',
   Operation: 'Transcode',
   Description:
@@ -11,10 +11,10 @@ const details = () => ({
   Inputs: [],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

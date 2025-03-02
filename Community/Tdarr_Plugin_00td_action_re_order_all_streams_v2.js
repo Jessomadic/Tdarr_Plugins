@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_action_re_order_all_streams_v2',
   Stage: 'Pre-processing',
-  Name: 'Re-order all streams V2',
+  Name: 'Re-order All Streams V2',
   Type: 'Video',
   Operation: 'Transcode',
   Description: `
@@ -83,10 +83,10 @@ The default order is suitable for most people.
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

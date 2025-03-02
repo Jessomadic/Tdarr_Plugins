@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_a37x_Drawmonster_MP4_No_Title_Meta",
     Stage: "Pre-processing",
-    Name: "Drawmonster MP4 No title meta data ",
+    Name: "Drawmonster MP4 No Title Meta Data",
     Type: "Video",
     Operation: 'Transcode',
     Description: `[Contains built-in filter] This plugin removes metadata (if a title exists). The output container is mp4. \n\n`,
@@ -13,11 +13,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

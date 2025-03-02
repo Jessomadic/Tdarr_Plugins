@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_lmg1_Reorder_Streams",
     Stage: "Pre-processing",
-    Name: "Tdarr_Plugin_lmg1_Reorder_Streams ",
+    Name: "Lmg1 Reorder Streams",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] This plugin will move the video stream to the front so Tdarr will recognize the codec correctly.\n\n`,
@@ -13,11 +13,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

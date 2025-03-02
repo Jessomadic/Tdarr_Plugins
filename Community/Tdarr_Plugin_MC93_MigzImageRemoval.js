@@ -2,7 +2,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_MC93_MigzImageRemoval',
   Stage: 'Pre-processing',
-  Name: 'Migz-Remove image formats from file',
+  Name: 'Migz Remove Image Formats From File',
   Type: 'Video',
   Operation: 'Transcode',
   Description: 'Identify any unwanted image formats in the file and remove those streams. MJPEG, PNG & GIF \n\n',
@@ -11,10 +11,10 @@ const details = () => ({
   Inputs: [],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

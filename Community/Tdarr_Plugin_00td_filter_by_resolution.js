@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_filter_by_resolution',
   Stage: 'Pre-processing',
-  Name: 'Filter by resolution',
+  Name: 'Filter By Resolution',
   Type: 'Video',
   Operation: 'Filter',
   Description: 'Only allow specified resolutions to be processed \n\n',
@@ -35,10 +35,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

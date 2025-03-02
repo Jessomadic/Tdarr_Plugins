@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_action_handbrake_ffmpeg_custom',
   Stage: 'Pre-processing',
-  Name: 'HandBrake or FFmpeg custom arguments',
+  Name: 'HandBrake Or FFmpeg Custom Arguments',
   Type: 'Video',
   Operation: 'Transcode',
   Description: `
@@ -70,15 +70,15 @@ HandBrake examples:
         type: 'text',
       },
       tooltip:
-        'Enter the desired container',
+        'Enter the desired container. Set to "original" to keep the original container.',
     },
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,
@@ -91,7 +91,13 @@ const plugin = (file, librarySettings, inputs, otherArguments) => {
   };
 
   response.preset = inputs.arguments;
-  response.container = `.${inputs.container}`;
+
+  if (inputs.container === 'original') {
+    response.container = `.${file.container}`;
+  } else {
+    response.container = `.${inputs.container}`;
+  }
+
   response.handbrakeMode = inputs.cli === 'handbrake';
   response.ffmpegMode = inputs.cli === 'ffmpeg';
   response.reQueueAfter = true;

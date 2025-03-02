@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_f001_Filter_Example',
   Stage: 'Pre-processing',
-  Name: 'Filter keywords ',
+  Name: 'Filter Keywords',
   Type: 'Video',
   Operation: 'Filter',
   Description: 'This plugin prevents processing files which contain keywords \n\n',
@@ -10,10 +10,10 @@ const details = () => ({
   Inputs: [],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   // Must return this object at some point in the function else plugin will fail.
 

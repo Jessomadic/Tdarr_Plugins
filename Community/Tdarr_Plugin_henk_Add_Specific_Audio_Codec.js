@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_henk_Add_Specific_Audio_Codec',
   Stage: 'Pre-processing',
-  Name: '[MKV ONLY] Transcode given codec to other given codec and keep original',
+  Name: '[MKV ONLY] Transcode Given Codec To Other Given Codec And Keep Original',
   Type: 'Audio',
   Operation: 'Transcode',
   Description: 'Re-encodes all audio tracks in a given codec to another given codec and keeps original.',
@@ -66,10 +66,10 @@ const details = () => ({
   }],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

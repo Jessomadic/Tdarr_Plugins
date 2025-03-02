@@ -8,7 +8,7 @@ const details = () => {
   return {
     id: 'Tdarr_Plugin_ER01_Transcode audio and video with HW (PC and Mac)',
     Stage: 'Pre-processing',
-    Name: 'Transcode Using QSV or VT & FFMPEG',
+    Name: 'Transcode Using QSV Or VT & FFMPEG',
     Type: 'Video',
     Operation: 'Transcode',
     Description: `Files not in H265 will be transcoded into H265 using hw with ffmpeg, assuming mkv container. Plugin uses QS if the node runs on a PC, or Videotoolbox if run on a Mac.
@@ -69,11 +69,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')(); const os = require('os');
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     container: '.mkv',

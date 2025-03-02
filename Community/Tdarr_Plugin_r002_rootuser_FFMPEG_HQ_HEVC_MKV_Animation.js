@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_r002_rootuser_FFMPEG_HQ_HEVC_MKV_Animation",
     Stage: "Pre-processing",
-    Name: "FFMPEG HQ 10-bit HEVC MKV for Animation",
+    Name: "FFMPEG HQ 10-bit HEVC MKV For Animation",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] High Quality FFMPEG transcoding settings for Animation. Converts all audio to AAC 512K. Preserves track names, metadata and attachments/fonts. Proper use of x265-params. CRF 18. Preset medium. 10-Bit Video encoding. Skips h.265 encoded videos. The output container is mkv. \n\n`,
@@ -13,11 +13,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   var transcode = 0; //if this var changes to 1 the file will be transcoded
 

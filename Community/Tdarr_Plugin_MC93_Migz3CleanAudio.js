@@ -2,7 +2,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_MC93_Migz3CleanAudio',
   Stage: 'Pre-processing',
-  Name: 'Migz-Clean audio streams',
+  Name: 'Migz Clean Audio Streams',
   Type: 'Audio',
   Operation: 'Transcode',
   Description: 'This plugin keeps only specified language tracks & can tags tracks with  an unknown language. \n\n',
@@ -85,10 +85,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

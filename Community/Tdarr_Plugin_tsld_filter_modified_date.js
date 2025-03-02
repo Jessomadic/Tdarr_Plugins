@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_tsld_filter_modified_date',
   Stage: 'Pre-processing',
-  Name: 'Filter modified date',
+  Name: 'Filter Modified Date',
   Type: 'Video',
   Operation: 'Filter',
   Description: 'This plugin prevents processing files older than 30 days \n\n',
@@ -27,10 +27,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: true,

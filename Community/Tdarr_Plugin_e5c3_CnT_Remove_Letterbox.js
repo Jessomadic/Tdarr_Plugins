@@ -5,7 +5,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_e5c3_CnT_Remove_Letterbox",
     Stage: "Pre-processing",
-    Name: "Remove letterbox",
+    Name: "Remove Letterbox",
     Type: "Video",
     Operation: "Transcode",
     Description: `Uses iiDrakeii's filter, and crops video files when letterboxing is detected.\nThis uses the FFMPEG NVENC transcoding(hw).\nIf a file is 4K it will be scaled down to 1080p.\nNow with user definable bitrates!(since 1.104 beta)\nCreated by @control#0405`,
@@ -34,11 +34,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')(); const fs = require("fs");
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   if (inputs.bitrate == "" || inputs.bitrate == "undefined") {
     var min_bitrate = 6600;

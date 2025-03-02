@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_MC93_Migz2CleanTitle',
   Stage: 'Pre-processing',
-  Name: 'Migz-Clean title metadata',
+  Name: 'Migz Clean Title Metadata',
   Type: 'Video',
   Operation: 'Transcode',
   Description: 'This plugin removes title metadata from video/audio/subtitles.\n\n',
@@ -67,10 +67,10 @@ Optional. Only removes titles if they contain at least 3 '.' characters.
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

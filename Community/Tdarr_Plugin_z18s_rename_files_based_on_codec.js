@@ -5,7 +5,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_z18s_rename_files_based_on_codec",
     Stage: "Post-processing",
-    Name: "Rename based on codec",
+    Name: "Rename Based On Codec",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] If the filename contains '264' or '265', this plugin renames 264 files to 265 or vice versa depending on codec. \n\n`,
@@ -15,11 +15,11 @@ const details = () => {
   };
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   try {
     var fs = require("fs");

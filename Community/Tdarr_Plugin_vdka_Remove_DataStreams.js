@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_vdka_Remove_DataStreams",
     Stage: "Pre-processing",
-    Name: "Remove Data Streams ",
+    Name: "Remove Data Streams",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] This plugin removes data streams if detected. The output container is mkv. Helps with issues like bin_data making files impossible to process. \n\n`,
@@ -13,11 +13,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

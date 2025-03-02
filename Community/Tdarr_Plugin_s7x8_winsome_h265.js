@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_s7x8_winsome_h265",
     Stage: "Pre-processing",
-    Name: "Winsome H265 ",
+    Name: "Winsome H265",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] This plugin transcodes all videos to h265 (if not in h265 already) and remuxes if not in mkv. If the English language track is not in AC3,EAC3 or DTS then an AC3 track is added.\n\n
@@ -14,11 +14,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

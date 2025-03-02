@@ -14,7 +14,7 @@ module.exports.dependencies = [
 const details = () => ({
   id: 'Tdarr_Plugin_pos1_Post_Proc_Example',
   Stage: 'Post-processing', // Preprocessing or Post-processing. Determines when the plugin will be executed. This plugin does some stuff after all plugins have been executed
-  Name: 'Post proc ',
+  Name: 'Post Proc',
   Type: 'Video',
   Operation: 'Transcode',
   Description: 'This plugin does some stuff after all plugins have been executed. \n\n',
@@ -44,13 +44,15 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
   // load default plugin inputs
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   inputs = lib.loadDefaultValues(inputs, details);
 
   // Only 'require' dependencies within this function or other functions. Do not require in the top scope.
+  // eslint-disable-next-line  @typescript-eslint/no-unused-vars
   const importFresh = require('import-fresh');
 
   console.log(

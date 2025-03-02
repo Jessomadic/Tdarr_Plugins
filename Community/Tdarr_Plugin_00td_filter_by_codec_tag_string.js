@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_filter_by_codec_tag_string',
   Stage: 'Pre-processing',
-  Name: 'Filter by codec tag string',
+  Name: 'Filter By Codec Tag String',
   Type: 'Video',
   Operation: 'Filter',
   Description: 'Only allow files with specified codec tag strings to be processed \n\n',
@@ -33,10 +33,10 @@ Leave blank if using codecTagStringsToProcess`,
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_action_standardise_audio_stream_codecs',
   Stage: 'Pre-processing',
-  Name: 'Standardise audio stream codecs',
+  Name: 'Standardise Audio Stream Codecs',
   Type: 'Video',
   Operation: 'Transcode',
   Description: `
@@ -36,10 +36,10 @@ into the specified codec. Bitrate and channel count are kept the same.
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

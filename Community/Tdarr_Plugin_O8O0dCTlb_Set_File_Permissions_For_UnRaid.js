@@ -6,7 +6,7 @@ const details = () => {
     return {
         id: "Tdarr_Plugin_O8O0dCTlb_Set_File_Permissions_For_UnRaid",
         Stage: 'Pre-processing',
-        Name: "Set file permissions for UnRaid",
+        Name: "Set File Permissions For UnRaid",
         Type: "Video",
         Operation: "Transcode",
         Description: "Sets file permissions using chown nobody:users to prevent lock from root. Use at end of stack. ",
@@ -16,11 +16,11 @@ const details = () => {
     }
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
 
     //Must return this object at some point

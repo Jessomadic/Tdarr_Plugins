@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_d5d3_iiDrakeii_FFMPEG_NVENC_Tiered_MKV",
     Stage: "Pre-processing",
-    Name: "Tiered FFMPEG NVENC settings depending on resolution",
+    Name: "Tiered FFMPEG NVENC Settings Depending On Resolution",
     Type: "Video",
     Operation: "Transcode",
     Description: `[Contains built-in filter] This plugin uses different FFMPEG NVENC transcoding settings for 480p,576p,720p,1080p and 4KUHD. If files are not in hevc they will be transcoded. The output container is mkv. \n\n`,
@@ -13,11 +13,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   var transcode = 0; //if this var changes to 1 the file will be transcoded
   var bitrateprobe = 0; //bitrate from ffprobe

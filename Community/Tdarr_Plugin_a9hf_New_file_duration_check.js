@@ -3,7 +3,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_a9hf_New_file_duration_check',
   Stage: 'Pre-processing',
-  Name: 'New file duration check',
+  Name: 'New File Duration Check',
   Type: 'Video',
   Operation: 'Transcode',
   Description: `Give an error if new file is not within the specified upper and lower bound duration limits.
@@ -38,7 +38,7 @@ const details = () => ({
 
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   // Must return this object at some point in the function else plugin will fail.
   const response = {

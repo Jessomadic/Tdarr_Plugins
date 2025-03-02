@@ -4,7 +4,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_drdd_standardise_all_in_one",
     Stage: "Pre-processing",
-    Name: "DrDD H265 MKV AC3 audio subtitles [VAAPI & NVENC]",
+    Name: "DrDD H265 MKV AC3 Audio Subtitles [VAAPI & NVENC]",
     Stage: "Pre-processing",
     Type: "Video",
     Operation: "Transcode",
@@ -411,11 +411,11 @@ function buildVideoConfiguration(inputs, file, logger) {
 
 //#endregion
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
 
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   var response = {
     container: ".mkv",

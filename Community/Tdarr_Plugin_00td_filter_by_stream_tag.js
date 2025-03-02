@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_filter_by_stream_tag',
   Stage: 'Pre-processing',
-  Name: 'Filter by stream tag',
+  Name: 'Filter By Stream Tag',
   Type: 'Video',
   Operation: 'Filter',
   Description: `Filter by stream tag value. Will check all streams. Useful for when e.g. trying to force transcoding
@@ -63,11 +63,11 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const { strHasValue } = require('../methods/utils');
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

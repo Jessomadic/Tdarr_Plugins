@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_f4k1_aune_audio_to_flac',
   Stage: 'Pre-processing',
-  Name: 'Aune - Audio to FLAC',
+  Name: 'Aune - Audio To FLAC',
   Type: 'Audio',
   Operation: 'Transcode',
   Description: 'This plugin transcodes different audio codecs to FLAC. '
@@ -30,10 +30,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
 
   const response = {

@@ -4,7 +4,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_DOOM_NVENC_Tiered_MKV_CleanAll",
     Stage: 'Pre-processing',
-    Name: "DOOM Tiered H265 MKV, remove audio & subtitles [NVENC]",
+    Name: "DOOM Tiered H265 MKV, Remove Audio & Subtitles [NVENC]",
     Stage: "Pre-processing",
     Type: "Video",
     Operation: "Transcode",
@@ -474,11 +474,11 @@ function buildVideoConfiguration(inputs, file, logger) {
 }
 
 //#endregion
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   var response = {
     container: ".mkv",

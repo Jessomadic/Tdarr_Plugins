@@ -4,7 +4,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_078d_Output_embedded_subs_to_SRT_and_remove",
     Stage: "Pre-processing",
-    Name: "Output embedded subs to SRT and remove",
+    Name: "Output Embedded Subs To SRT And Remove",
     Type: "Video",
     Operation: "Transcode",
     Description: `This plugin outputs embedded subs to SRT and then removes them \n\n`,
@@ -14,11 +14,11 @@ const details = () => {
   };
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object at some point in the function else plugin will fail.
 

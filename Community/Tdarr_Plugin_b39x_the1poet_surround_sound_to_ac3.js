@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_b39x_the1poet_surround_sound_to_ac3',
   Stage: 'Pre-processing',
-  Name: 'the1poet Video surround sound to ac3',
+  Name: 'The1poet Video Surround Sound To AC3',
   Type: 'Video',
   Operation: 'Transcode',
   Description: '[Contains built-in filter]  If the file has surround sound tracks not in ac3,'
@@ -27,10 +27,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   // Must return this object
 

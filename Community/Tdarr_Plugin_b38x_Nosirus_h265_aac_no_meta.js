@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_b38x_Nosirus_h265_aac_no_meta",
     Stage: "Pre-processing",
-    Name: "Nosirus h265, aac, no meta, subs kept",
+    Name: "Nosirus H265, AAC, No Meta, Subs Kept",
     Type: "Video",
     Operation: 'Transcode',
     Description: `[Contains built-in filter] If the file is not in h265 it will be trancoded into h265 with FFmpeg using the following command '-e x265 -q 22 --encoder-preset slow --all-audio --all-subtitles copy:aac -E fdk_aac -Q 4 -x aq-mode=3'. If no aac, aac track will be added. Subtitles are kept. Metadata is removed.\n\n
@@ -14,11 +14,11 @@ const details = () => {
   };
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

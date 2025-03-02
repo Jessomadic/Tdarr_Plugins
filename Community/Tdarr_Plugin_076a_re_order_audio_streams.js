@@ -3,7 +3,7 @@ const details = () => {
   return {
     id: "Tdarr_Plugin_076a_re_order_audio_streams",
     Stage: "Pre-processing",
-    Name: "Re-order audio streams",
+    Name: "Re-order Audio Streams",
     Type: "Audio",
     Operation: "Transcode",
     Description: `[Contains built-in filter] Specify a language tag for Tdarr to try and put as 1st audio track  \n\n`,
@@ -41,11 +41,11 @@ const details = () => {
   };
 };
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
     
     const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   //Must return this object
 

@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_00td_filter_bit_depth',
   Stage: 'Pre-processing',
-  Name: 'Filter bit depth: 8,10,12 bit video',
+  Name: 'Filter Bit Depth: 8,10,12 Bit Video',
   Type: 'Video',
   Operation: 'Filter',
   Description: 'Allow/disallow 8,10,12 bit video to be processed.',
@@ -50,10 +50,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

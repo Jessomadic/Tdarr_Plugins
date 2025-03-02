@@ -1,7 +1,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_jeons001_Downmix_to_stereo_and_apply_DRC',
   Stage: 'Pre-processing',
-  Name: 'Downmix & Dynamic range compression',
+  Name: 'Downmix & Dynamic Range Compression',
   Type: 'Audio',
   Operation: 'Transcode',
   Description: 'Downmixes surround to AAC stereo AND applies dynamic range compression.'
@@ -11,10 +11,10 @@ const details = () => ({
   Inputs: [],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,

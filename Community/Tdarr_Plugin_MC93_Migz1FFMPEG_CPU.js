@@ -2,7 +2,7 @@
 const details = () => ({
   id: 'Tdarr_Plugin_MC93_Migz1FFMPEG_CPU',
   Stage: 'Pre-processing',
-  Name: 'Migz-Transcode Using CPU & FFMPEG',
+  Name: 'Migz Transcode Using CPU & FFMPEG',
   Type: 'Video',
   Operation: 'Transcode',
   Description: `Files not in H265 will be transcoded into H265 using CPU with ffmpeg.
@@ -88,10 +88,10 @@ const details = () => ({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = (file, librarySettings, inputs, otherArguments) => {
   const lib = require('../methods/lib')();
-  // eslint-disable-next-line no-unused-vars,no-param-reassign
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
   inputs = lib.loadDefaultValues(inputs, details);
   const response = {
     processFile: false,
